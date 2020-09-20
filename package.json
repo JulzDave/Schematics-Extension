@@ -1,5 +1,5 @@
 {
-	"name": "mataf-nx-nestjs-schematic",
+	"name": "mataf-schematics",
 	"displayName": "Mataf Schematics",
 	"description": "Mataf schemtics installer.",
 	"icon": "assets/images/fibi-icon.png",
@@ -17,13 +17,13 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:mataf-nx-nestjs-schematic.nxNestJSSchematic"
+		"onCommand:mataf-schematics.nxNestJSSchematic"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "mataf-nx-nestjs-schematic.nxNestJSSchematic",
+				"command": "mataf-schematics.nxNestJSSchematic",
 				"title": "Mataf NX-NestJS schematic"
 			}
 		]
