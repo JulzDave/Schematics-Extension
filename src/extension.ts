@@ -22,7 +22,6 @@ export function activate(context: vscode.ExtensionContext) {
         remotePath = remotePath.substr(1);
     }
 
-    const nestSchematicRelativetoWorkspace = relative(remotePath, absolutePathtoCollection);
     const installSchematicCmd = `schematics "${relative(remotePath, resolve(remotePath, absolutePathtoCollection))+":nest"}" --debug=false --force`;
     console.log(installSchematicCmd);
 
