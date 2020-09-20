@@ -1,12 +1,12 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
-import { relative, normalize } from "path";
+import { relative, normalize, resolve } from "path";
 
 const NX_NESTJS_SCHEMATIC_RELATIVE_LOCATION =
     "/../schematics/NestJS/src/collection.json";
 const NOTIFY_USER_TO_ADDRESS_TERMINAL =
-    'You have been prompted by the "Mataf Schematics" extension.\nPlease address the integrated terminal to proceed.';
+    'You have been prompted by the "Mataf Schematics" extension.\nAddress the integrated terminal to proceed.';
 const enum SchematicFactories {
     nest = "nest"
 }
@@ -30,7 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     const clientRelativeCollectionPath = relative(
         remotePath,
-        absoluteCollectionPath
+        resolve(remotePath, absoluteCollectionPath)
     );
 
     if (remotePath[0] === "/" || remotePath[0] === "\\") {
