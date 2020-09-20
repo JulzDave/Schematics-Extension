@@ -1,0 +1,10 @@
+{
+    "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+    "schematics": {
+        "nest": {
+            "description": "NX NestJS plugin schematic.",
+            "factory": "../dist/nest/index",
+            "schema": "./nest/schema.json"
+        }
+    }
+}

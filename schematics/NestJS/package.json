@@ -1,0 +1,36 @@
+{
+    "name": "nest",
+    "version": "0.0.0",
+    "description": "A blank schematics",
+    "scripts": {
+        "build": "rm -rf dist && tsc -p tsconfig.json && cp -rv src/nest/files dist/nest",
+        "build:watch": "rm -rf dist && mkdir -p dist/nest && cp -rv src/nest/files dist/nest && tsc -p tsconfig.json --watch",
+        "test": "npm run build && jasmine src/**/*_spec.js",
+        "format": "npx prettier . --write"
+    },
+    "keywords": [
+        "schematics"
+    ],
+    "author": "",
+    "license": "MIT",
+    "schematics": "./src/collection.json",
+    "dependencies": {
+        "@angular-devkit/core": "^10.1.0",
+        "@angular-devkit/schematics": "^10.1.0",
+        "@schematics/angular": "^9.1.0",
+        "align-text": "^1.0.2",
+        "boxen": "^4.2.0",
+        "columnify": "^1.5.4",
+        "lodash": "^4.17.20",
+        "typescript": "~4.0.2"
+    },
+    "devDependencies": {
+        "@angular/cli": "^10.1.0",
+        "@nativescript/schematics": "^10.0.2",
+        "@types/jasmine": "~3.5.0",
+        "@types/lodash": "^4.14.161",
+        "@types/node": "^12.11.1",
+        "jasmine": "^3.5.0",
+        "prettier": "^2.1.1"
+    }
+}

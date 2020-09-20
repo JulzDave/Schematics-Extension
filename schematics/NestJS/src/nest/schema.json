@@ -1,0 +1,44 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "nxNestjsSchematics",
+    "title": "Mataf @nrwl/nest Schema",
+    "type": "object",
+    "description": "Wraps a nest module with Mataf's boilerplate",
+    "properties": {
+        "pluginName": {
+            "type": "string",
+            "description": "The given name for one of the generated @nrwl/nest modules",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            },
+            "x-prompt": "Specify the name of the of the target NestJS plugin:\n"
+        },
+        "timeoutDelta": {
+            "type": "string",
+            "description": "The number of seconds to wait before returning a timeout error. If omitted, the value 5 is used",
+            "$default": {
+                "$source": "argv",
+                "index": 1
+            },
+            "default": "5",
+            "enum": ["3 seconds", "5 seconds", "10 seconds"],
+            "x-prompt": "Specify the number of seconds to wait before returning a timeout error:",
+            "items": [
+                {
+                    "value": "3",
+                    "label": "3 seconds"
+                },
+                {
+                    "value": "5",
+                    "label": "5 seconds"
+                },
+                {
+                    "value": "10",
+                    "label": "10 seconds"
+                }
+            ]
+        }
+    },
+    "required": ["pluginName"]
+}
