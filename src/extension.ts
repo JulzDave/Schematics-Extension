@@ -23,7 +23,6 @@ export function activate(context: vscode.ExtensionContext) {
     }
 
     const installSchematicCmd = `schematics "${relative(remotePath, resolve(remotePath, absolutePathtoCollection))+":nest"}" --debug=false --force`;
-    console.log(installSchematicCmd);
 
     // TODO: In package.json, change repository.url to azure repo url
     let disposable = vscode.commands.registerCommand(
