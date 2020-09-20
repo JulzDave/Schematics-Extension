@@ -1,9 +1,10 @@
 {
 	"name": "mataf-nx-nestjs-schematic",
-	"displayName": "Mataf NX NestJS schematic",
-	"description": "mataf schemtic installer for NX embedded NestJS plugin.",
+	"displayName": "Mataf Schematics",
+	"description": "Mataf schemtics installer.",
 	"icon": "assets/images/fibi-icon.png",
-	"publisher": "Julian-Dave-Shikui",
+	"publisher": "Mataf-Research-and-Development",
+	"author": "Julian Dave Shikui",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/JulzDave/Vscode-extension---Mataf-NX-NestJS-schematic.git"
