@@ -9,3 +9,4 @@ vsc-extension-quickstart.md
 **/.eslintrc.json
 **/*.map
 **/*.ts
+!vscode-eslint-2.1.8_vsixhub.com.vsix
