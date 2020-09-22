@@ -1,6 +1,6 @@
 out
 node_modules
 .vscode-test/
-*.vsix
 assets/images/*.Identifier
 schematics/NestJS/node_modules
+mataf-schematics-*
