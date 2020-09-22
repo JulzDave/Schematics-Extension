@@ -70,8 +70,6 @@ export function activate(context: vscode.ExtensionContext) {
             vscode.window.showInformationMessage(
                 NOTIFY_USER_TO_ADDRESS_TERMINAL,
             );
-
-            vscode.window.showInformationMessage(ESLINT_INSTALLATION_COMMAND);
         },
     );
     context.subscriptions.push(disposable);
