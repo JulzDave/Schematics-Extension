@@ -9,7 +9,7 @@
 		"type": "git",
 		"url": "https://github.com/JulzDave/Vscode-extension---Mataf-NX-NestJS-schematic.git"
 	},
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.49.0"
 	},
