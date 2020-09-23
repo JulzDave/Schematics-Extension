@@ -2,16 +2,34 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { relative, normalize, resolve, join } from 'path';
+import { readdirSync } from 'fs';
 
+const F_ROOT_DIR = () => join(__dirname, '\\..').split('\\').join('/');
+
+const ROOT_DIR_FILES = readdirSync(F_ROOT_DIR());
+
+const F_VSIX_FILES = () =>
+    ROOT_DIR_FILES.filter(
+        (file) => file.toLowerCase().substr(file.length - 5) === '.vsix',
+    );
+
+const F_ESLINT_VSIX_FILE_NAME = () => {
+    const eslintExtensionFiles = F_VSIX_FILES()
+        .filter((file) => file.includes('eslint'))!
+        .sort();
+    return eslintExtensionFiles[eslintExtensionFiles.length - 1];
+};
+
+const ESLINT_EXTENSION_ID = 'dbaeumer.vscode-eslint';
 const NX_NESTJS_SCHEMATIC_RELATIVE_LOCATION =
     '/../schematics/NestJS/src/collection.json';
+const NOTIFY_USER_TO_RELOAD =
+    'ESlint extension was installed.\nPlease address the terminal and Reload the window only after applying the schematic.';
 const NOTIFY_USER_TO_ADDRESS_TERMINAL =
     'You have been prompted by the "Mataf Schematics" extension.\nAddress the integrated terminal to proceed.';
-const ESLINT_VSIX_NAME = 'vscode-eslint-2.1.8_vsixhub.com.vsix';
-const enum SchematicFactories {
+const enum ESchematicFactories {
     nest = 'nest',
 }
-const ROOT_DIR = join(__dirname, '\\..');
 
 const COLLECTION_JSON_ABS_PATH = normalize(
     __dirname + NX_NESTJS_SCHEMATIC_RELATIVE_LOCATION,
@@ -27,10 +45,14 @@ const CLIENT_RELATIVE_COLLECTION_PATH = relative(
 if (REMOTE_PATH[0] === '/' || REMOTE_PATH[0] === '\\') {
     REMOTE_PATH = REMOTE_PATH.substr(1);
 }
-const INSTALL_SCHEMATIC_COMMAND = `schematics '${CLIENT_RELATIVE_COLLECTION_PATH}:${SchematicFactories.nest}' --debug=false --force`;
-let ESLINT_INSTALLATION_COMMAND = `code --install-extension ${ROOT_DIR}\\${ESLINT_VSIX_NAME}`
+
+const INSTALL_SCHEMATIC_COMMAND = `schematics '${CLIENT_RELATIVE_COLLECTION_PATH}:${ESchematicFactories.nest}' --debug=false --force`;
+
+let ESLINT_INSTALLATION_COMMAND = `code --install-extension ${F_ROOT_DIR()}\\${F_ESLINT_VSIX_FILE_NAME()}`
     .split('\\')
     .join('/');
+
+const ESLINT_EXTENSION_EXISTS = vscode.extensions.getExtension(ESLINT_EXTENSION_ID);
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -53,23 +75,36 @@ export function activate(context: vscode.ExtensionContext) {
             if (!vscode.window.activeTerminal) {
                 const newTerminalInstance = vscode.window.createTerminal();
                 newTerminalInstance.show();
-                newTerminalInstance.sendText(ESLINT_INSTALLATION_COMMAND, true);
+
+                if (!ESLINT_EXTENSION_EXISTS) {
+                    newTerminalInstance.sendText(
+                        ESLINT_INSTALLATION_COMMAND,
+                        true,
+                    );
+                }
+
                 newTerminalInstance.sendText(INSTALL_SCHEMATIC_COMMAND, true);
             } else {
                 vscode.window.activeTerminal.show();
-                vscode.window.activeTerminal.sendText(
-                    ESLINT_INSTALLATION_COMMAND,
-                    true,
-                );
+
+                if (!ESLINT_EXTENSION_EXISTS) {
+                    vscode.window.activeTerminal.sendText(
+                        ESLINT_INSTALLATION_COMMAND,
+                        true,
+                    );
+                }
+
                 vscode.window.activeTerminal.sendText(
                     INSTALL_SCHEMATIC_COMMAND,
                     true,
                 );
             }
 
+            ESLINT_EXTENSION_EXISTS ?
             vscode.window.showInformationMessage(
                 NOTIFY_USER_TO_ADDRESS_TERMINAL,
-            );
+            ) : 
+            vscode.window.showInformationMessage(NOTIFY_USER_TO_RELOAD);
         },
     );
     context.subscriptions.push(disposable);
@@ -77,12 +112,3 @@ export function activate(context: vscode.ExtensionContext) {
 
 // this method is called when your extension is deactivated
 export function deactivate() {}
-
-// ! detect shell type snippet
-/* 
-(vscode.window.activeTerminal?.creationOptions as Readonly<
-     vscode.TerminalOptions
- >).shellPath
-     ?.toLowerCase()
-     .includes('') 
-     */
