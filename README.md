@@ -1,36 +1,44 @@
-# Mataf NX-NestJS schematic
+# Mataf schematics
 
-This is an installer for the custom Mataf NX-NestJS dedicated plugin schematic.
+This is an installer for the custom Mataf schematics.
 
 ## Features
+`Mataf Schematics` is a workflow tool that applies transformations to your newly created projects. It is designed to improve your development productivity by adding scaffolding to your project, including best practices and standards, with security in mind. <br />
+Amongst the differnt features, `Mataf Schematics` adds support for:
 
-Currently, this extension only supports `NestJS` plugins on an `@nrwl/NX` workspace
+>- Swagger OpenAPI Specification
+>- GZIP Compression
+>- Elastic APM
+>- Cross-Origin Resource Sharing
+>- Security best practices (e.g `helmet`, `csurf`)
+
+Currently, this extension supports:
+1. `NestJS` projects.
+2. `NestJS` plugins on a `@nrwl/NX` workspace.
 
 ## Requirements
+All the schematics are designed to be applied on a newly created project. 
+>**`:warning:`** `Applying the schematics on a WIP project will override vital files, resulting in a filesystem corruption.`
 
--   This extension will not work outside of an `@nrwl/NX` workspace.
+### NX-NestJS
+-   This extension will not work outside of an `@nrwl/NX` workspace root directory.
 -   A `NestJS` plugin must already be installed to apply the schematic.
+-   `workspace.json` must be present in the workspace root folder for the schematic to work. 
+### NestJS
+-   This extension will not work outside of an `NestJS` project root directory.
+-   `nest-cli.json` must be present in the root folder for the schematic to work. 
 
 ## Instructions
 
 1. Activate the command-line (`Ctrl+Shift+P`) and enter `"Mataf schematic"`.
 2. Choose the relevant schematic.
-3. You will thereafter be prompted with a use-case specific instruction in the terminal.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
--   `myExtension.enable`: enable/disable this extension
--   `myExtension.thing`: set to `blah` to do something
+3. You will thereafter be prompted with the related instruction by the terminal.
 
 ## Release Notes
 
-This extension currently supports `NestJS` plugins that exist in a `nrwl/NX` workspace.
+This extension currently supports:
+1. `NestJS` projects.
+2. `NestJS` plugins on a `@nrwl/NX` workspace.
 
 ### 1.0.0
 
