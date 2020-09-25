@@ -1,10 +1,15 @@
 {
     "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
     "schematics": {
-        "nest": {
-            "description": "NX NestJS plugin schematic.",
-            "factory": "../dist/nest/index",
-            "schema": "./nest/schema.json"
+        "nxNestJS": {
+            "description": "Mataf NX NestJS plugin schematic.",
+            "factory": "../dist/nest/index#nxNestJS",
+            "schema": "./nest/nx-nestjs-schema.json"
+        },
+        "nestJS": {
+            "description": "Mataf NestJS schematic.",
+            "factory": "../dist/nest/index#nestJS",
+            "schema": "./nest/nestjs-schema.json"
         }
     }
 }

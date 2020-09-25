@@ -30,7 +30,8 @@ const NOTIFY_USER_TO_ADDRESS_TERMINAL =
     'You have been prompted by the "Mataf Schematics" extension.\nAddress the integrated terminal to proceed.';
 
 export const enum ESchematicFactories {
-    nxNest = 'nest',
+    nxNestjs = 'nxNestJS',
+    nestjs = 'nestJS',
 }
 
 const COLLECTION_JSON_ABS_PATH = normalize(

@@ -24,13 +24,19 @@ import {
 import { existsSync } from 'fs';
 // Interfaces:
 import { IDependency } from '../interfaces/dependency';
-import { ISchema } from '../interfaces/schema';
+import { INxNestJsSchema, INestJsSchema } from '../interfaces/schema';
 // Services:
 import { displayMsgToStdOut } from './services/display-message';
 
+const enum ESchematicType {
+    nxNestJS = 'nxNestJS',
+    nestJS = 'nestJS',
+}
 const WORKSPACE_PATH = 'workspace.json';
 const NOT_IN_NX_WORKSPACE_MSG = 'Not an NX CLI workspace';
-const SCHEMATICS_TEMPLATES_PATH = 'files'; // This path as relative to the root ./dist/nest folder
+const NX_NESTJS_TEMPLATES_PATH = 'nx-nestjs-files'; // This path as relative to the root ./dist/nest folder
+const NESTJS_TEMPLATES_PATH = 'nestjs-files'; // This path as relative to the root ./dist/nest folder
+const NESTJS_SRC_FOLDER = 'src';
 
 const FILES_TO_DELETE = {
     fromAppDirectory: [
@@ -56,8 +62,17 @@ const DEPENDENCIES: IDependency[] = [
     { name: 'csurf', version: '^1.11.0', type: dependencies },
 ];
 
-function filesToDelete(pluginName: string): string[] {
+function nxNestjsfilesToDelete(pluginName: string): string[] {
     const appDirectory = `apps/${pluginName}/src/app`;
+    const { fromAppDirectory, fromRootDirectory } = FILES_TO_DELETE;
+    const appDirFilesWithPath = fromAppDirectory.map(
+        (file): string => appDirectory + file,
+    );
+    return appDirFilesWithPath.concat(fromRootDirectory);
+}
+
+function nestjsfilesToDelete(_: never): string[] {
+    const appDirectory = NESTJS_SRC_FOLDER;
     const { fromAppDirectory, fromRootDirectory } = FILES_TO_DELETE;
     const appDirFilesWithPath = fromAppDirectory.map(
         (file): string => appDirectory + file,
@@ -105,7 +120,7 @@ function assignDependenciesToPackageJson(tree: Tree): void {
 // You don't have to export the function as default. You can also have more than one rule factory
 // per file.
 
-export default function nest(options: ISchema): Rule {
+export function nxNestJS(options: INxNestJsSchema): Rule {
     return (tree: Tree, context: SchematicContext) => {
         const workspaceConfigBuffer = tree.read(WORKSPACE_PATH);
 
@@ -128,7 +143,7 @@ export default function nest(options: ISchema): Rule {
         const defaultProjectPath = buildDefaultPath(pluginSrcFolderPath);
         const parsedPath = parseName(defaultProjectPath, pluginName);
         const { name } = parsedPath;
-        const sourceTemplates = url(SCHEMATICS_TEMPLATES_PATH);
+        const sourceTemplates = url(NX_NESTJS_TEMPLATES_PATH);
 
         const sourceParameterizedTemplates = apply(sourceTemplates, [
             renameTemplateFiles(),
@@ -140,12 +155,63 @@ export default function nest(options: ISchema): Rule {
             move(pluginSrcFolderPath),
         ]);
 
-        deleteFiles(filesToDelete, dasherizedPluginName, tree);
+        deleteFiles(nxNestjsfilesToDelete, dasherizedPluginName, tree);
         assignDependenciesToPackageJson(tree);
         context.addTask(new NodePackageInstallTask());
 
         context.engine.executePostTasks().subscribe(() => {
-            displayMsgToStdOut(DEPENDENCIES);
+            displayMsgToStdOut(DEPENDENCIES, ESchematicType.nxNestJS);
+        });
+
+        return mergeWith(sourceParameterizedTemplates)(tree, context);
+    };
+}
+
+export function nestJS(options: INestJsSchema): Rule {
+    return (tree: Tree, context: SchematicContext) => {
+        const workspaceConfigBuffer = tree.read('nest-cli.json');
+        const packageJsonConfigBuffer = tree.read('package.json');
+
+        if (!workspaceConfigBuffer || !packageJsonConfigBuffer) {
+            throw new SchematicsException('NestJS workspace not found!');
+        }
+
+        const parsedPackageJson = JSON.parse(
+            packageJsonConfigBuffer.toString(),
+        );
+        const projectName = parsedPackageJson?.name;
+        if (!projectName) {
+            throw new SchematicsException('NestJS project name not found!');
+        }
+        options['projectName'] = projectName;
+        const dasherizedProjectName = dasherize(projectName);
+        const srcFolderPath: any = 'src';
+
+        if (!srcFolderPath) {
+            throw new SchematicsException(
+                `Source directory not found for "${dasherizedProjectName}" project.`,
+            );
+        }
+
+        const defaultProjectPath = buildDefaultPath(srcFolderPath);
+        const parsedPath = parseName(defaultProjectPath, projectName);
+        const { name } = parsedPath;
+        const sourceTemplates = url(NESTJS_TEMPLATES_PATH);
+        const sourceParameterizedTemplates = apply(sourceTemplates, [
+            renameTemplateFiles(),
+            template({
+                ...options,
+                ...strings,
+                name,
+            }),
+            move(srcFolderPath),
+        ]);
+
+        deleteFiles(nestjsfilesToDelete, dasherizedProjectName, tree);
+        assignDependenciesToPackageJson(tree);
+        context.addTask(new NodePackageInstallTask());
+        context.engine.executePostTasks().subscribe(() => {
+            displayMsgToStdOut(DEPENDENCIES, ESchematicType.nestJS);
         });
 
         return mergeWith(sourceParameterizedTemplates)(tree, context);

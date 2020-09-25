@@ -17,7 +17,8 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:mataf-schematics.nxNestJSSchematic"
+        "onCommand:mataf-schematics.nxNestJSSchematic",
+        "onCommand:mataf-schematics.nestJSSchematic"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -25,6 +26,10 @@
             {
                 "command": "mataf-schematics.nxNestJSSchematic",
                 "title": "Mataf NX-NestJS schematic"
+            },
+            {
+                "command": "mataf-schematics.nestJSSchematic",
+                "title": "Mataf NestJS schematic"
             }
         ]
     },

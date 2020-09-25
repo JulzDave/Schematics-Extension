@@ -1,3 +1,3 @@
 import { Rule } from '@angular-devkit/schematics';
-import { ISchema } from './interfaces/schema';
-export declare function nest(options: ISchema): Rule;
+import { INxNestJsSchema } from './interfaces/schema';
+export declare function nest(options: INxNestJsSchema): Rule;

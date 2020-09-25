@@ -6,6 +6,8 @@ const boxen = require('boxen');
 
 // Interfaces:
 import { IDependency } from '../../interfaces/dependency';
+import { NESTJS_STDOUT_EXPLANATORY_TITLE } from './messages-data';
+import { ISchematicTypes } from '../../interfaces/schema';
 
 // Data files:
 import {
@@ -13,7 +15,7 @@ import {
     BREAK_TWO_LINES,
     STDOUT_ASCII_ART_DATA,
     STDOUT_BULLETINS,
-    STDOUT_EXPLANATORY_TITLE,
+    NX_NESTJS_STDOUT_EXPLANATORY_TITLE,
 } from './messages-data';
 
 const DEPENDENCY_NAME = 'name';
@@ -50,7 +52,15 @@ function logMessage(index: number, messages: any[]): void {
     }, 75);
 }
 
-export function displayMsgToStdOut(dependencies: IDependency[]): void {
+const relevantExplanatoryTitle: ISchematicTypes = {
+    nxNestJS: NX_NESTJS_STDOUT_EXPLANATORY_TITLE,
+    nestJS: NESTJS_STDOUT_EXPLANATORY_TITLE,
+};
+
+export function displayMsgToStdOut(
+    dependencies: IDependency[],
+    schematicType: keyof ISchematicTypes,
+): void {
     const sortedDependencies = sortDependencies(dependencies);
     const columns = columnify(sortedDependencies, COLUMNIFY_CONFIG);
 
@@ -61,7 +71,7 @@ export function displayMsgToStdOut(dependencies: IDependency[]): void {
             yellow(outputToCenter(asciiDatum)),
         ),
         BREAK_LINE,
-        ...STDOUT_EXPLANATORY_TITLE.map((titleDatum) =>
+        ...relevantExplanatoryTitle[schematicType].map((titleDatum) =>
             yellow(bold(outputToCenter(titleDatum, true))),
         ),
         BREAK_LINE,

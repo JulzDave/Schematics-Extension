@@ -8,9 +8,16 @@ export const STDOUT_ASCII_ART_DATA = [
     String.raw`                                                                     | |                    `,
     String.raw`                                                                     |_|                    `,
 ];
-export const STDOUT_EXPLANATORY_TITLE = [
+
+const INSTRUCTION_SUBTITLE = 'Follow the steps below to take full advantage of this schematic:';
+
+export const NX_NESTJS_STDOUT_EXPLANATORY_TITLE = [
     'This is a custom Mataf NX-NestJS dedicated plugin schematic',
-    'Follow the steps below to take full advantage of this schematic:',
+    INSTRUCTION_SUBTITLE,
+];
+export const NESTJS_STDOUT_EXPLANATORY_TITLE = [
+    'This is a custom Mataf NestJS dedicated schematic',
+    INSTRUCTION_SUBTITLE,
 ];
 export const STDOUT_BULLETINS = [
     '• Replace placeholders with useful content.',

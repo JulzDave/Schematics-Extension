@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "nestjsSchematics",
+    "title": "Mataf NestJS Schema",
+    "type": "object",
+    "description": "Wraps a nest module with Mataf's boilerplate",
+    "properties": {
+        "timeoutDelta": {
+            "type": "string",
+            "description": "The number of seconds to wait before returning a timeout error. If omitted, the value 5 is used",
+            "$default": {
+                "$source": "argv",
+                "index": 1
+            },
+            "default": "5",
+            "enum": ["3 seconds", "5 seconds", "10 seconds"],
+            "x-prompt": "Specify the number of seconds to wait before returning a timeout error:",
+            "items": [
+                {
+                    "value": "3",
+                    "label": "3 seconds"
+                },
+                {
+                    "value": "5",
+                    "label": "5 seconds"
+                },
+                {
+                    "value": "10",
+                    "label": "10 seconds"
+                }
+            ]
+        }
+    }
+}

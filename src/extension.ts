@@ -20,14 +20,23 @@ export function activate(context: vscode.ExtensionContext) {
     // The commandId parameter must match the command field in package.json
 
     // TODO: In package.json, change repository.url to azure repo url
-    let disposable = vscode.commands.registerCommand(
+    let nxNestjsCommand = vscode.commands.registerCommand(
         'mataf-schematics.nxNestJSSchematic',
         () => {
             // The code you place here will be executed every time your command is executed
-            installSchematic(ESchematicFactories.nxNest);
+            installSchematic(ESchematicFactories.nxNestjs);
         },
     );
-    context.subscriptions.push(disposable);
+    let nestjsCommand = vscode.commands.registerCommand(
+        'mataf-schematics.nestJSSchematic',
+        () => {
+            // The code you place here will be executed every time your command is executed
+            installSchematic(ESchematicFactories.nestjs);
+        },
+    );
+    [nxNestjsCommand, nestjsCommand].forEach((command) => {
+        context.subscriptions.push(command);
+    });
 }
 
 // this method is called when your extension is deactivated
