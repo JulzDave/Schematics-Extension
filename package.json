@@ -35,7 +35,9 @@
         "watch": "tsc -watch -p ./",
         "pretest": "npm run compile && npm run lint",
         "test": "node ./out/test/runTest.js",
-        "format": "npx prettier . --write"
+        "format": "npx prettier . --write",
+        "package:non-bash": "cd ./schematics/NestJS/ ; npm run build ; cd ../../ ; vsce package",
+        "package:bash": "cd ./schematics/NestJS/ && npm run build && cd ../../ && vsce package"
     },
     "devDependencies": {
         "@types/vscode": "^1.43.0",
