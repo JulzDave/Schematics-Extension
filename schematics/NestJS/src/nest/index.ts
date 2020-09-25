@@ -43,7 +43,7 @@ const FILES_TO_DELETE = {
     fromRootDirectory: ['package-lock.json'],
 };
 
- // eslint-disable-next-line
+// eslint-disable-next-line
 const { Default: dependencies, Dev: devDependencies } = NodeDependencyType;
 
 const DEPENDENCIES: IDependency[] = [
