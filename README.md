@@ -1,6 +1,6 @@
 # <img src='assets/images/fibi-logo.png' alt='Mataf logo' width=25/> Mataf schematics
 
-This is an installer for custom Mataf schematics.
+This Vscode extension applies installations for custom Mataf schematics.
 
 ## Features
 `Mataf Schematics` is a workflow tool that applies transformations to your newly created projects. It is designed to improve your development productivity by adding scaffolding to your project, including both best practices and security in mind.
