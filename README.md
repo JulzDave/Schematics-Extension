@@ -1,4 +1,4 @@
-# Mataf schematics
+# <img src='assets/images/fibi-logo.png' alt='Mataf logo' width=25/> Mataf schematics
 
 This is an installer for the custom Mataf schematics.
 
