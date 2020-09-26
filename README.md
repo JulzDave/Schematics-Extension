@@ -1,3 +1,4 @@
+<!-- ![Mataf logo](assets/images/fibi-logo.png =25x25) -->
 # <img src='assets/images/fibi-logo.png' alt='Mataf logo' width=25/> Mataf schematics
 
 This Vscode extension applies installations for custom Mataf schematics.
