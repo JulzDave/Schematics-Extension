@@ -10,6 +10,7 @@ This is an installer for the custom Mataf schematics.
    - Elastic APM
    - Cross-Origin Resource Sharing
    - Security best practices (e.g `helmet`, `csurf`)
+   - HTTP request timeout management
 
 - Currently, this extension supports:
     - `NestJS` projects.
