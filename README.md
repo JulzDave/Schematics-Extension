@@ -22,11 +22,12 @@ This is an installer for custom Mataf schematics.
 All the schematics are designed to be applied on a newly created project. 
 > **`:warning:`** `Applying the schematics on a WIP project will override vital files, resulting in a filesystem corruption.`
 
-- #### <ins>**NX-NestJS:**<ins />
+<ins> Current available schematics are as follows: <ins />
+- #### NRWL NX NestJS Plugins:
     -   This extension will not work outside of an `@nrwl/NX` workspace root    directory.
     -   A `NestJS` plugin must already be installed to apply the schematic.
     -   `workspace.json` must be present in the workspace's root folder for this schematic to work. 
-- #### <ins>**NestJS:**<ins />
+- #### NestJS Projects:
     -   This extension will not work outside of an `NestJS` project root    directory.
     -   `nest-cli.json` must be present in project's the root folder for this schematic to work. 
 
