@@ -3,18 +3,17 @@
 This is an installer for the custom Mataf schematics.
 
 ## Features
-`Mataf Schematics` is a workflow tool that applies transformations to your newly created projects. It is designed to improve your development productivity by adding scaffolding to your project, including best practices and standards, with security in mind. <br />
-Amongst the differnt features, `Mataf Schematics` adds support for:
+`Mataf Schematics` is a workflow tool that applies transformations to your newly created projects. It is designed to improve your development productivity by adding scaffolding to your project, including best practices with security in mind. <br />
+- Amongst the differnt features, `Mataf Schematics` adds support for:
+   - Swagger OpenAPI Specification
+   - GZIP Compression
+   - Elastic APM
+   - Cross-Origin Resource Sharing
+   - Security best practices (e.g `helmet`, `csurf`)
 
->- Swagger OpenAPI Specification
->- GZIP Compression
->- Elastic APM
->- Cross-Origin Resource Sharing
->- Security best practices (e.g `helmet`, `csurf`)
-
-Currently, this extension supports:
-1. `NestJS` projects.
-2. `NestJS` plugins on a `@nrwl/NX` workspace.
+- Currently, this extension supports:
+    - `NestJS` projects.
+    - `NestJS` plugins on a `@nrwl/NX` workspace.
 
 ## Requirements
 All the schematics are designed to be applied on a newly created project. 
