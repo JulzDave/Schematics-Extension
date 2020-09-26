@@ -3,7 +3,7 @@
 This is an installer for the custom Mataf schematics.
 
 ## Features
-`Mataf Schematics` is a workflow tool that applies transformations to your newly created projects. It is designed to improve your development productivity by adding scaffolding to your project, including best practices with security in mind. <br />
+`Mataf Schematics` is a workflow tool that applies transformations to your newly created projects. It is designed to improve your development productivity by adding scaffolding to your project, including both best practices and security in mind.
 - Amongst the differnt features, `Mataf Schematics` adds support for:
    - Swagger OpenAPI Specification
    - GZIP Compression
@@ -11,6 +11,8 @@ This is an installer for the custom Mataf schematics.
    - Cross-Origin Resource Sharing
    - Security best practices (e.g `helmet`, `csurf`)
    - HTTP request timeout management
+   - `ESLint` static code analysis tool
+   - Health check components
 
 - Currently, this extension supports:
     - `NestJS` projects.
@@ -18,7 +20,7 @@ This is an installer for the custom Mataf schematics.
 
 ## Requirements
 All the schematics are designed to be applied on a newly created project. 
->**`:warning:`** `Applying the schematics on a WIP project will override vital files, resulting in a filesystem corruption.`
+> **`:warning:`** `Applying the schematics on a WIP project will override vital files, resulting in a filesystem corruption.`
 
 ### NX-NestJS
 -   This extension will not work outside of an `@nrwl/NX` workspace root directory.
