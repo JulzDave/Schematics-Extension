@@ -19,7 +19,7 @@ This is an installer for custom Mataf schematics.
     - `NestJS` plugins on a `@nrwl/NX` workspace.
 
 ## Requirements
-All the schematics are designed to be applied on a newly created project. 
+All the schematics are designed to be applied on newly created projects. 
 > **`:warning:`** `Applying the schematics on a WIP project will override vital files, resulting in a filesystem corruption.`
 
 <ins> Current available schematics are as follows: <ins />
