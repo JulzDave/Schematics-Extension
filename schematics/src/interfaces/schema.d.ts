@@ -7,6 +7,6 @@ export interface INestJsSchema {
 }
 
 export interface ISchematicTypes {
-    nxNestJS: string[]
-    nestJS: string[]
+    nxNestJS: string[];
+    nestJS: string[];
 }

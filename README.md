@@ -1,36 +1,43 @@
 <!-- ![Mataf logo](assets/images/fibi-logo.png =25x25) -->
+
 # <img src='assets/images/fibi-logo.png' alt='Mataf logo' width=25/> Mataf schematics
 
 This Vscode extension applies installations for custom Mataf schematics.
 
 ## Features
-`Mataf Schematics` is a workflow tool that applies transformations to your newly created projects. It is designed to improve your development productivity by adding scaffolding to your project, including both best practices and security in mind.
-- Amongst the differnt features, `Mataf Schematics` adds support for:
-   - Swagger OpenAPI Specification
-   - GZIP Compression
-   - Elastic APM
-   - Cross-Origin Resource Sharing
-   - Security best practices (e.g `helmet`, `csurf`)
-   - HTTP request timeout management
-   - `ESLint` static code analysis tool
-   - Health check components
 
-- Currently, this extension supports:
-    - `NestJS` projects.
-    - `NestJS` plugins on a `@nrwl/NX` workspace.
+`Mataf Schematics` is a workflow tool that applies transformations to your newly created projects. It is designed to improve your development productivity by adding scaffolding to your project, including both best practices and security in mind.
+
+-   Amongst the differnt features, `Mataf Schematics` adds support for:
+
+    -   Swagger OpenAPI Specification
+    -   GZIP Compression
+    -   Elastic APM
+    -   Cross-Origin Resource Sharing
+    -   Security best practices (e.g `helmet`, `csurf`)
+    -   HTTP request timeout management
+    -   `ESLint` static code analysis tool
+    -   Health check components
+
+-   Currently, this extension supports:
+    -   `NestJS` projects.
+    -   `NestJS` plugins on a `@nrwl/NX` workspace.
 
 ## Requirements
-All the schematics are designed to be applied on newly created projects. 
+
+All the schematics are designed to be applied on newly created projects.
+
 > **`:warning:`** `Applying the schematics on a WIP project will override/delete vital files and may result in a filesystem corruption.`
 
 <ins> Current available schematics are as follows: <ins />
-- #### NRWL NX NestJS Plugins:
-    -   This extension will not work outside of an `@nrwl/NX` workspace root    directory.
+
+-   #### NRWL NX NestJS Plugins:
+    -   This extension will not work outside of an `@nrwl/NX` workspace root directory.
     -   A `NestJS` plugin must already be installed to apply the schematic.
-    -   `workspace.json` must be present in the workspace's root folder for this schematic to work. 
-- #### NestJS Projects:
-    -   This extension will not work outside of an `NestJS` project root    directory.
-    -   `nest-cli.json` must be present in project's the root folder for this schematic to work. 
+    -   `workspace.json` must be present in the workspace's root folder for this schematic to work.
+-   #### NestJS Projects:
+    -   This extension will not work outside of an `NestJS` project root directory.
+    -   `nest-cli.json` must be present in project's the root folder for this schematic to work.
 
 ## Instructions
 
@@ -41,6 +48,7 @@ All the schematics are designed to be applied on newly created projects.
 ## Release Notes
 
 This extension currently supports:
+
 1. `NestJS` projects.
 2. `NestJS` plugins on a `@nrwl/NX` workspace.
 

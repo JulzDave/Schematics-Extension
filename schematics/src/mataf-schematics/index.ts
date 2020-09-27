@@ -1,14 +1,13 @@
 // Schematics packages:
-import {
-    Rule,
-    SchematicContext,
-    Tree,
-} from '@angular-devkit/schematics';
+import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 
 // Interfaces:
 import { INxNestJsSchema, INestJsSchema } from '../interfaces/schema';
 // Services:
-import { validateNxNestjsWorkspace, validateNestjsProject } from './services/validate-location';
+import {
+    validateNxNestjsWorkspace,
+    validateNestjsProject,
+} from './services/validate-location';
 import { confirmChanges } from './services/execute-changes';
 
 const NX_NESTJS_TEMPLATES_PATH = 'nx-nestjs-files'; // This path as relative to the root ./dist/nest folder
@@ -31,7 +30,7 @@ export function nxNestJS(options: INxNestJsSchema): Rule {
             tree,
             context,
             NX_NESTJS_TEMPLATES_PATH,
-            ESchematicType.nxNestJS
+            ESchematicType.nxNestJS,
         );
     };
 }
@@ -48,9 +47,7 @@ export function nestJS(options: INestJsSchema): Rule {
             tree,
             context,
             NESTJS_TEMPLATES_PATH,
-            ESchematicType.nestJS
+            ESchematicType.nestJS,
         );
     };
 }
-
-

@@ -9,7 +9,8 @@ export const STDOUT_ASCII_ART_DATA = [
     String.raw`                                                                     |_|                    `,
 ];
 
-const INSTRUCTION_SUBTITLE = 'Follow the steps below to take full advantage of this schematic:';
+const INSTRUCTION_SUBTITLE =
+    'Follow the steps below to take full advantage of this schematic:';
 
 export const NX_NESTJS_STDOUT_EXPLANATORY_TITLE = [
     'This is a custom Mataf NX-NestJS dedicated plugin schematic',
