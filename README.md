@@ -21,7 +21,7 @@ This Vscode extension applies installations for custom Mataf schematics.
 
 ## Requirements
 All the schematics are designed to be applied on newly created projects. 
-> **`:warning:`** `Applying the schematics on a WIP project will override vital files and may result in a filesystem corruption.`
+> **`:warning:`** `Applying the schematics on a WIP project will override/delete vital files and may result in a filesystem corruption.`
 
 <ins> Current available schematics are as follows: <ins />
 - #### NRWL NX NestJS Plugins:
