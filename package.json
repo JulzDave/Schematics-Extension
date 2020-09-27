@@ -41,7 +41,7 @@
         "pretest": "npm run compile && npm run lint",
         "test": "node ./out/test/runTest.js",
         "format": "npx prettier . --write",
-        "package": "cd ./schematics/NestJS/ && npm run build && cd ../../ && vsce package"
+        "package": "cd ./schematics/ && npm run build && cd ../ && vsce package"
     },
     "devDependencies": {
         "@types/vscode": "^1.43.0",

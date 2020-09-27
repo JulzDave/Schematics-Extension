@@ -3,13 +3,13 @@
     "schematics": {
         "nxNestJS": {
             "description": "Mataf NX NestJS plugin schematic.",
-            "factory": "../dist/nest/index#nxNestJS",
-            "schema": "./nest/nx-nestjs-schema.json"
+            "factory": "../dist/mataf-schematics/index#nxNestJS",
+            "schema": "./mataf-schematics/nx-nestjs-schema.json"
         },
         "nestJS": {
             "description": "Mataf NestJS schematic.",
-            "factory": "../dist/nest/index#nestJS",
-            "schema": "./nest/nestjs-schema.json"
+            "factory": "../dist/mataf-schematics/index#nestJS",
+            "schema": "./mataf-schematics/nestjs-schema.json"
         }
     }
 }

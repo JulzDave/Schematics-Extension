@@ -23,7 +23,7 @@ const F_ESLINT_VSIX_FILE_NAME = () => {
 
 const ESLINT_EXTENSION_ID = 'dbaeumer.vscode-eslint';
 const NX_NESTJS_SCHEMATIC_RELATIVE_LOCATION =
-    '/../schematics/NestJS/src/collection.json';
+    '/../schematics/src/collection.json';
 const NOTIFY_USER_TO_RELOAD =
     'ESlint extension was installed.\nPlease address the terminal and Reload the window only after applying the schematic.';
 const NOTIFY_USER_TO_ADDRESS_TERMINAL =
