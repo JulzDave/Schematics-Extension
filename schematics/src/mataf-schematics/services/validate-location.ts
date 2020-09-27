@@ -13,6 +13,12 @@ const NESTJS_PROJECT_NAME_NOT_FOUND = 'NestJS project name not found!';
 const PROJECT_NAME_KEY_LITERAL = 'projectName';
 const NESTJS_SRC_PATH = 'src';
 
+const PLUGIN_NOT_FOUND = (pluginName: string) =>
+    `Plugin ${pluginName} not found`;
+
+const SOURCE_DIR_NOT_FOUND = (projectName: string) =>
+    `Source directory not found for "${projectName}" project.`;
+
 function throwIfNegative(conditions: any[], msg: string) {
     let negativeResults: undefined[] = [];
     conditions.forEach((condition) => {
@@ -41,9 +47,9 @@ export function validateNxNestjsWorkspace(
 
     throwIfNegative(
         [pluginSrcFolderPath],
-        `Plugin ${dasherizedPluginName} not found`,
+        PLUGIN_NOT_FOUND(dasherizedPluginName),
     );
-    
+
     return {
         pluginSrcFolderPath,
         pluginName,
@@ -71,7 +77,7 @@ export function validateNestjsProject(tree: Tree, options: INestJsSchema) {
 
     throwIfNegative(
         [srcFolderPath],
-        `Source directory not found for "${dasherizedProjectName}" project.`,
+        SOURCE_DIR_NOT_FOUND(dasherizedProjectName),
     );
 
     return {

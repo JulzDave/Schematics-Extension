@@ -57,13 +57,15 @@ const NESTJS_FILES_TO_DELETE = {
     fromRootDirectory: ['package-lock.json'],
 };
 
+const NX_APP_PATH = (pluginName: string) => `apps/${pluginName}/src/app`;
+
 function prepareNestjsFilesForDeletion(
     schematicType: ESchematicType,
     pluginName: string,
 ): string[] {
     const deleteFromDir =
         schematicType === ESchematicType.nxNestJS
-            ? `apps/${pluginName}/src/app`
+            ? NX_APP_PATH(pluginName)
             : NESTJS_SRC_FOLDER;
     const { fromSourceDirectory, fromRootDirectory } = NESTJS_FILES_TO_DELETE;
     const sourceDirFilesWithPath = fromSourceDirectory.map(
