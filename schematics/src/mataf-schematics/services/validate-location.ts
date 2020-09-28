@@ -19,36 +19,25 @@ const PLUGIN_NOT_FOUND = (pluginName: string) =>
 const SOURCE_DIR_NOT_FOUND = (projectName: string) =>
     `Source directory not found for "${projectName}" project.`;
 
-function throwIfNegative(conditions: any[], msg: string) {
-    let negativeResults: undefined[] = [];
-    conditions.forEach((condition) => {
-        if (!condition) {
-            negativeResults.push(undefined);
-        }
-    });
-    if (negativeResults.length === conditions.length) {
-        throw new SchematicsException(msg);
-    }
-}
-
 export function validateNxNestjsWorkspace(
     tree: Tree,
     options: INxNestJsSchema,
 ) {
     const workspaceConfigBuffer = tree.read(WORKSPACE_PATH);
 
-    throwIfNegative([workspaceConfigBuffer], NOT_IN_NX_WORKSPACE_MSG);
+    if (!workspaceConfigBuffer) {
+        throw new SchematicsException(NOT_IN_NX_WORKSPACE_MSG);
+    }
 
-    const workspaceConfig = JSON.parse(workspaceConfigBuffer!.toString());
+    const workspaceConfig = JSON.parse(workspaceConfigBuffer.toString());
     const { pluginName } = options;
     const dasherizedPluginName = dasherize(pluginName);
     const pluginSrcFolderPath =
         workspaceConfig?.projects?.[dasherizedPluginName]?.sourceRoot;
 
-    throwIfNegative(
-        [pluginSrcFolderPath],
-        PLUGIN_NOT_FOUND(dasherizedPluginName),
-    );
+    if (!pluginSrcFolderPath) {
+        throw new SchematicsException(PLUGIN_NOT_FOUND(dasherizedPluginName));
+    }
 
     return {
         pluginSrcFolderPath,
@@ -61,24 +50,26 @@ export function validateNestjsProject(tree: Tree, options: INestJsSchema) {
     const projectConfigBuffer = tree.read(NEST_CLI_JSON_LITERAL);
     const packageJsonConfigBuffer = tree.read(PACKAGE_JSON_LITERAL);
 
-    throwIfNegative(
-        [projectConfigBuffer, packageJsonConfigBuffer],
-        NESTJS_PROJECT_NOT_FOUND,
-    );
+    if (!projectConfigBuffer || !packageJsonConfigBuffer) {
+        throw new SchematicsException(NESTJS_PROJECT_NOT_FOUND);
+    }
 
-    const parsedPackageJson = JSON.parse(packageJsonConfigBuffer!.toString());
+    const parsedPackageJson = JSON.parse(packageJsonConfigBuffer.toString());
     const projectName = parsedPackageJson?.name;
 
-    throwIfNegative([projectName], NESTJS_PROJECT_NAME_NOT_FOUND);
+    if (!projectName) {
+        throw new SchematicsException(NESTJS_PROJECT_NAME_NOT_FOUND);
+    }
 
     options[PROJECT_NAME_KEY_LITERAL] = projectName;
     const dasherizedProjectName = dasherize(projectName);
     const srcFolderPath: any = NESTJS_SRC_PATH;
 
-    throwIfNegative(
-        [srcFolderPath],
-        SOURCE_DIR_NOT_FOUND(dasherizedProjectName),
-    );
+    if (!srcFolderPath) {
+        throw new SchematicsException(
+            SOURCE_DIR_NOT_FOUND(dasherizedProjectName),
+        );
+    }
 
     return {
         srcFolderPath,
