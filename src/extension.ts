@@ -6,6 +6,11 @@ import {
     ESchematicFactories,
 } from './schematic-installation-script';
 
+enum EschematicTitles {
+    nestJS = 'NestJS Project Schematic',
+    nxNestJS = 'NRWL/NX NestJS Plugin Schematic',
+}
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -20,23 +25,35 @@ export function activate(context: vscode.ExtensionContext) {
     // The commandId parameter must match the command field in package.json
 
     // TODO: In package.json, change repository.url to azure repo url
-    let nxNestjsCommand = vscode.commands.registerCommand(
-        'mataf-schematics.nxNestJSSchematic',
-        () => {
+    const matafSchematicsCommand = vscode.commands.registerCommand(
+        'mataf-schematics.matafSchematicsQuickPick',
+        (): void => {
             // The code you place here will be executed every time your command is executed
-            installSchematic(ESchematicFactories.nxNestjs);
+            const quickPick = vscode.window.createQuickPick();
+            quickPick.items = Object.values(EschematicTitles).map(
+                (item): vscode.QuickPickItem => {
+                    return { label: item };
+                },
+            );
+            quickPick.onDidChangeSelection(([item]): void => {
+                try {
+                    switch (item.label) {
+                        case EschematicTitles.nestJS:
+                            installSchematic(ESchematicFactories.nestjs);
+                            break;
+                        case EschematicTitles.nxNestJS:
+                            installSchematic(ESchematicFactories.nxNestjs);
+                            break;
+                    }
+                } finally {
+                    quickPick.dispose();
+                }
+            });
+            quickPick.onDidHide(() => quickPick.dispose());
+            quickPick.show();
         },
     );
-    let nestjsCommand = vscode.commands.registerCommand(
-        'mataf-schematics.nestJSSchematic',
-        () => {
-            // The code you place here will be executed every time your command is executed
-            installSchematic(ESchematicFactories.nestjs);
-        },
-    );
-    [nxNestjsCommand, nestjsCommand].forEach((command) => {
-        context.subscriptions.push(command);
-    });
+    context.subscriptions.push(matafSchematicsCommand);
 }
 
 // this method is called when your extension is deactivated

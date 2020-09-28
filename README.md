@@ -41,9 +41,11 @@ All the schematics are designed to be applied on newly created projects.
 
 ## Instructions
 
-1. Activate the command-line (`Ctrl+Shift+P`) and enter `"Mataf schematic"`.
-2. Choose the relevant schematic.
-3. You will thereafter be prompted with the related instruction by the terminal.
+1. Open the command-line (`Ctrl+Shift+P`) and activate `"Mataf schematics"`.
+2. Choose the relevant schematic from the quick pick menu.
+3. You will thereafter be prompted with the appropriate instruction by the terminal.
+4. After applying the schematic, reload your editor and make sure that the ESLint Vscode extension was installed successfully. If not, install it manually.
+
 
 ## Release Notes
 

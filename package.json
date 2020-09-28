@@ -17,19 +17,14 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:mataf-schematics.nxNestJSSchematic",
-        "onCommand:mataf-schematics.nestJSSchematic"
+        "onCommand:mataf-schematics.matafSchematicsQuickPick"
     ],
     "main": "./out/extension.js",
     "contributes": {
         "commands": [
             {
-                "command": "mataf-schematics.nxNestJSSchematic",
-                "title": "Mataf NX-NestJS schematic"
-            },
-            {
-                "command": "mataf-schematics.nestJSSchematic",
-                "title": "Mataf NestJS schematic"
+                "command": "mataf-schematics.matafSchematicsQuickPick",
+                "title": "Mataf schematics"
             }
         ]
     },
