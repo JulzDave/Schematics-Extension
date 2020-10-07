@@ -8,7 +8,7 @@ This Vscode extension applies installations for custom Mataf schematics.
 
 `Mataf Schematics` is a workflow tool that applies transformations to your newly created projects. It is designed to improve your development productivity by adding scaffolding to your project, including both best practices and security in mind.
 
--   Amongst the differnt features, `Mataf Schematics` adds support for:
+-   Amongst the different features, `Mataf Schematics` adds support for:
 
     -   Swagger OpenAPI Specification
     -   GZIP Compression
@@ -45,7 +45,6 @@ All the schematics are designed to be applied on newly created projects.
 2. Choose the relevant schematic from the quick pick menu.
 3. You will thereafter be prompted with the appropriate instruction by the terminal.
 4. After applying the schematic, reload your editor and make sure that the ESLint Vscode extension was installed successfully. If not, install it manually.
-
 
 ## Release Notes
 
