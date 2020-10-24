@@ -30,6 +30,7 @@ import { INestJsSchema, INxNestJsSchema } from '../../interfaces/schema';
 // services:
 import { displayMsgToStdOut } from './display-message';
 import { ESchematicType } from '..';
+import { readmeData } from './readme-data';
 
 // eslint-disable-next-line
 const { Default: dependencies, Dev: devDependencies } = NodeDependencyType;
@@ -46,6 +47,7 @@ const DEPENDENCIES: IDependency[] = [
 
 const NESTJS_SRC_FOLDER = 'src';
 const PACKAGE_JSON_PATH = 'package.json';
+const README_MD_PATH = 'README.md';
 const NESTJS_FILES_TO_DELETE = {
     fromSourceDirectory: [
         '/app.controller.spec.ts',
@@ -169,6 +171,10 @@ function addScriptsToPackageJson(tree: Tree, schematicType: ESchematicType) {
     );
 }
 
+function addReadmeTemplate() {
+    writeFileSync(README_MD_PATH, readmeData);
+}
+
 export function confirmChanges(
     srcFolderPath: any,
     projectName: any,
@@ -198,7 +204,11 @@ export function confirmChanges(
     );
 
     addScriptsToPackageJson(tree, schematicType);
+
+    addReadmeTemplate();
+
     assignDependenciesToPackageJson(tree);
+
     context.addTask(new NodePackageInstallTask());
 
     context.engine.executePostTasks().subscribe(() => {
