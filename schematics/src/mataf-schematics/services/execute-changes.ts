@@ -46,7 +46,6 @@ const DEPENDENCIES: IDependency[] = [
 
 const NESTJS_SRC_FOLDER = 'src';
 const PACKAGE_JSON_PATH = 'package.json';
-
 const NESTJS_FILES_TO_DELETE = {
     fromSourceDirectory: [
         '/app.controller.spec.ts',
@@ -127,15 +126,31 @@ function assignDependenciesToPackageJson(tree: Tree): void {
     });
 }
 
-function addScriptsToPackageJson(tree: Tree, schematicType: ESchematicType) {
-    const scriptsToAdd = PACKAGE_JSON_SCRIPTS_ADDITION[schematicType];
-    const scriptKeys = Object.keys(scriptsToAdd);
-
+function validatePackageJsonExistance(
+    tree: Tree,
+    scriptKeys: string[],
+): Buffer | undefined {
     if (scriptKeys.length === 0) {
         return;
     }
 
     const packageJsonConfigBuffer = tree.read(PACKAGE_JSON_PATH);
+
+    if (!packageJsonConfigBuffer) {
+        return;
+    }
+
+    return packageJsonConfigBuffer;
+}
+
+function addScriptsToPackageJson(tree: Tree, schematicType: ESchematicType) {
+    const scriptsToAdd = PACKAGE_JSON_SCRIPTS_ADDITION[schematicType];
+    const scriptKeys = Object.keys(scriptsToAdd);
+
+    const packageJsonConfigBuffer = validatePackageJsonExistance(
+        tree,
+        scriptKeys,
+    );
 
     if (!packageJsonConfigBuffer) {
         return;
