@@ -7,7 +7,7 @@ import { INxNestJsSchema, INestJsSchema } from '../../interfaces/schema';
 const WORKSPACE_PATH = 'workspace.json';
 const NOT_IN_NX_WORKSPACE_MSG = 'Not an NX CLI workspace';
 const NEST_CLI_JSON_LITERAL = 'nest-cli.json';
-const PACKAGE_JSON_LITERAL = 'package.json';
+const PACKAGE_JSON_PATH = 'package.json';
 const NESTJS_PROJECT_NOT_FOUND = 'NestJS project not found!';
 const NESTJS_PROJECT_NAME_NOT_FOUND = 'NestJS project name not found!';
 const PROJECT_NAME_KEY_LITERAL = 'projectName';
@@ -48,7 +48,7 @@ export function validateNxNestjsWorkspace(
 
 export function validateNestjsProject(tree: Tree, options: INestJsSchema) {
     const projectConfigBuffer = tree.read(NEST_CLI_JSON_LITERAL);
-    const packageJsonConfigBuffer = tree.read(PACKAGE_JSON_LITERAL);
+    const packageJsonConfigBuffer = tree.read(PACKAGE_JSON_PATH);
 
     if (!projectConfigBuffer || !packageJsonConfigBuffer) {
         throw new SchematicsException(NESTJS_PROJECT_NOT_FOUND);

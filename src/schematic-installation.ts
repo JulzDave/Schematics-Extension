@@ -27,7 +27,7 @@ export const enum ESchematicFactories {
 // TODO: look into improving this codeline syntax...
 const workspaceDirectoryPath = () => {
     try {
-        return workspace.workspaceFolders![0]?.uri.path;
+        return workspace.workspaceFolders![0]?.uri?.path;
     } catch (err) {
         throw window.showErrorMessage(
             `${PACKAGE_NAME} cannot operate in a vacum, make sure you have a designated project location`,

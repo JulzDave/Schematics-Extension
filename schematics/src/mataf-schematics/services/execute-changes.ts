@@ -21,7 +21,7 @@ import {
 } from '@schematics/angular/utility/dependencies';
 
 // NodeJS packages:
-import { existsSync } from 'fs';
+import { existsSync, writeFileSync } from 'fs';
 
 // Interfaces:
 import { IDependency } from '../../interfaces/dependency';
@@ -45,6 +45,7 @@ const DEPENDENCIES: IDependency[] = [
 ];
 
 const NESTJS_SRC_FOLDER = 'src';
+const PACKAGE_JSON_PATH = 'package.json';
 
 const NESTJS_FILES_TO_DELETE = {
     fromSourceDirectory: [
@@ -55,6 +56,17 @@ const NESTJS_FILES_TO_DELETE = {
         '/app.service.ts',
     ],
     fromRootDirectory: ['package-lock.json'],
+};
+
+const PACKAGE_JSON_SCRIPTS_ADDITION: Record<
+    ESchematicType | 'all',
+    Record<string, string>
+> = {
+    [ESchematicType.nxNestJS]: {
+        'build:all': 'nx run-many --target=build --all',
+    },
+    [ESchematicType.nestJS]: {},
+    all: {},
 };
 
 const NX_APP_PATH = (pluginName: string) => `apps/${pluginName}/src/app`;
@@ -71,6 +83,7 @@ function prepareNestjsFilesForDeletion(
     const sourceDirFilesWithPath = fromSourceDirectory.map(
         (file): string => deleteFromDir + file,
     );
+
     return sourceDirFilesWithPath.concat(fromRootDirectory);
 }
 
@@ -114,6 +127,33 @@ function assignDependenciesToPackageJson(tree: Tree): void {
     });
 }
 
+function addScriptsToPackageJson(tree: Tree, schematicType: ESchematicType) {
+    const scriptsToAdd = PACKAGE_JSON_SCRIPTS_ADDITION[schematicType];
+    const scriptKeys = Object.keys(scriptsToAdd);
+
+    if (scriptKeys.length === 0) {
+        return;
+    }
+
+    const packageJsonConfigBuffer = tree.read(PACKAGE_JSON_PATH);
+
+    if (!packageJsonConfigBuffer) {
+        return;
+    }
+
+    const parsedPackageJson = JSON.parse(packageJsonConfigBuffer.toString());
+
+    scriptKeys.forEach(
+        (scriptKey) =>
+            (parsedPackageJson.scripts[scriptKey] = scriptsToAdd[scriptKey]),
+    );
+
+    writeFileSync(
+        PACKAGE_JSON_PATH,
+        JSON.stringify(parsedPackageJson, null, 4),
+    );
+}
+
 export function confirmChanges(
     srcFolderPath: any,
     projectName: any,
@@ -134,6 +174,7 @@ export function confirmChanges(
         options,
         srcFolderPath,
     );
+
     deleteFiles(
         prepareNestjsFilesForDeletion,
         dasherizedProjectName,
@@ -141,8 +182,10 @@ export function confirmChanges(
         schematicType,
     );
 
+    addScriptsToPackageJson(tree, schematicType);
     assignDependenciesToPackageJson(tree);
     context.addTask(new NodePackageInstallTask());
+
     context.engine.executePostTasks().subscribe(() => {
         displayMsgToStdOut(DEPENDENCIES, schematicType);
     });
